@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.options::after {
+  display: block;
+  content:attr(data-selected);
+
+}
+
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #AEAEAE;
+  border-radius: 2px;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #B5CC22;
+  border: none;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "\2713";
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
