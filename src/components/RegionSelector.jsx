@@ -6,6 +6,7 @@ import Search from '@/assets/search.svg'
 import { regionObjects } from '@/utils/regions';
 import useRegion from '@/store/useRegion';
 import useContent from '@/store/useInput';
+import useCurrCity from '@/store/useCurrCity';
 export default function RegionSelector({ }) {
   //開啟縣市列表
   const [selectedRegion, setSelectedRegion] = useState(() => regionObjects);
@@ -13,8 +14,9 @@ export default function RegionSelector({ }) {
   const [regionsOn, setRegionsOn] = useState(false)
   const [selectAllRegion, setSelectAllRegion] = useState(true)
   const [CurrText, setCurrText] =useState('')
-  const {  addRegions, removeRegions } = useRegion();
-  const {textChanger} = useContent();
+  const {  addRegions, removeRegions } = useRegion()
+  const { setCity } = useCurrCity()
+  const {textChanger} = useContent()
 
   // 更新全局狀態
   const changeStore = (regionName, target) => {
@@ -63,6 +65,7 @@ export default function RegionSelector({ }) {
           <ul
             onClick={({ target }) => {
               if (target.id === '') return
+              setCity(target.id)
               setCurrCity(target.id)
             }}
             className={`w-[175px] rounded-lg max-lg:w-[311px] bg-[#F6F6F6] absolute  -bottom-[13.5rem] left-0 z-20  grid gap-4 ${regionsOn ? 'grid ' : ' hidden'}`} >
@@ -81,7 +84,7 @@ export default function RegionSelector({ }) {
           <input
             value={CurrText} 
             onChange={(e)=>{
-
+//設置輸入狀態並更改全局狀態
               setCurrText(e.target.value)
               textChanger(e.target.value)
             }}

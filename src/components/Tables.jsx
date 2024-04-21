@@ -5,7 +5,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 
 import useRegion from '@/store/useRegion';
 import useContent from '@/store/useInput';
-
+import useCurrCity from '@/store/useCurrCity';
 
 
 export default function Tables({ data }) {
@@ -13,6 +13,7 @@ export default function Tables({ data }) {
   const [sortBool, setSortBool] = useState(true);
   const { regions } = useRegion()
   const { text } = useContent()
+  const { city } = useCurrCity()
 
 
 
@@ -23,7 +24,7 @@ export default function Tables({ data }) {
     })
     //勾選後打字過濾
     const filteredItems = result.filter(
-      item => item.sna.toLowerCase().includes(text.toLowerCase()) || item.sarea.toLowerCase().includes(text.toLowerCase())
+      item => item.sna.toLowerCase().includes(text.toLowerCase()) 
     );
     setStations(filteredItems)
 
@@ -91,8 +92,8 @@ export default function Tables({ data }) {
 
 
 
-
-  const Example = () => (
+//滑行優化(windowing)，只會顯示當前區塊內資料
+  const StationList = () => (
 
     <AutoSizer>
       {({ height, width }) => (
@@ -129,7 +130,7 @@ export default function Tables({ data }) {
 
             </th>
             <th scope="col" className=" h-6 w-[20%] text-[16px] font-[500] leading-[24px] text-center ">
-              <dive className="flex items-center justify-center  py-6 px-6">
+              <div className="flex items-center justify-center  py-6 px-6">
                 可借車輛
                 <span
                   className='cursor-pointer'
@@ -139,7 +140,7 @@ export default function Tables({ data }) {
                   className="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
                   </svg></span>
-              </dive>
+              </div>
             </th>
             <th scope="col" className=" h-6 w-[20%] text-[16px] font-[500] leading-[24px]">
               <div className="flex items-center justify-center px-6 py-6">
@@ -158,44 +159,15 @@ export default function Tables({ data }) {
           </tr>
         </thead>
         <tbody className='w-full  h-full '>
-          <Example />
+          {
+            city === '臺北市' ? <StationList />:null
+          }
+          
         </tbody>
-
-
-
-
-
-
       </table>
     </div>
 
   )
-  function DataList({ index, style }) {
 
-    return stations.map(e => {
-      return (
-        <>
-          <tr className="odd:bg-white odd:dark:bg-[#F6F6F6]   border-b">
-            <th scope="row" className="w-[48px] h-[24px] font-[400] text-[16px] leading-[24px] text-center">
-              台北市
-            </th>
-            <td className="    px-6 py-6 w-[48px] h-[24px] font-[400] text-[16px] leading-[24px] text-center">
-              {e.sarea}
-            </td>
-            <td className="   px-6 py-6 w-[48px] h-[24px] font-[400] text-[16px] leading-[24px] text-center">
-              {e.sna}
-            </td>
-            <td className="   px-6 py-6 w-[48px] h-[24px] font-[400] text-[16px] leading-[24px] text-center">
-              {e.sbi}
-            </td>
-            <td className="   px-6 py-6 w-[48px] h-[24px] font-[400] text-[16px] leading-[24px] text-center">
-              {e.tot}
-            </td>
-          </tr>
-        </>
-      )
-    })
-
-  }
 }
 

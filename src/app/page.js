@@ -5,7 +5,6 @@ import NavLinks from '@/components/navLinks';
 import BurgerMenu from '@/components/BurgerMenu';
 import Logo from '@/assets/logo.png'
 
-
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,7 +15,7 @@ export default function Nav() {
     <>
       <div className="flex justify-between items-center gap-10 relative h-[95px]">
         <div className="w-[95px] h-[95px] relative max-lg:w-[65px] max-lg:h-[65px]">
-          <Image alt="logo" src={Logo} fill sizes="100vw" priority/>
+          <Image alt="logo" src={Logo} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" priority/>
         </div>
 
         <div className="lg:hidden max-lg:w-6 max-lg:h-6 flex items-center justify-center cursor-pointer"

@@ -1,13 +1,13 @@
 import RegionSelector from "@/components/RegionSelector";
-// import Tables from "@/components/Tables";
 import Image from "next/image";
 import Frame from '@/assets/Frame.png'
 import { youBikeStations } from "@/utils/data";
 import dynamic from "next/dynamic";
 const Tables = dynamic(()=>import('@/components/Tables'),{ssr:false})
 export default async function Stations({ searchParams }) {
+  //初始化資料
   const data = await youBikeStations()
-
+  
   return (
     <>
 

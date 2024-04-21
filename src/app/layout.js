@@ -14,13 +14,7 @@ export default function RootLayout({ children }) {
 
   return (
 
-    <html html lang="en" >
-      <head>
-        <meta httpEquiv="Cache-control" content="no-cache" />
-        <meta httpEquiv="Cache" content="no-cache" />
-        <meta httpEquiv="Expires" content="0" />
-      </head>
-
+    <html  lang="en" >
       <body className={`${Noto_Sans_400.className} h-dvh w-dvh`}>
         <Container>
           <Nav />
